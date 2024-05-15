@@ -10,10 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-public class Home {
+public class HomeController {
 
     @GetMapping("/")
     public String home() {
         return "Welcome to my Spring Boot application!";
     }
+
+    @GetMapping("/helloworld")
+    public String getHelloWorld() {
+        return "Hello World";
+    }
+
 }
