@@ -26,18 +26,34 @@ variables:
     value: "github.tools.sap"
 
 
-steps:
-  - script: echo Hello, world!
-    displayName: 'Run a one-line script'
+#steps:
+#  - script: echo Hello, world!
+#    displayName: 'Run a one-line script'
+#
+#  - script: |
+#      ls -la
+#    displayName: 'Run a multi-line script'
+#  - script: |
+#      ifconfig
+#    displayName: 'My private IP'
+#  - script: |
+#      curl ifconfig.me/all
+#    displayName: 'My Host IP'
+#  - task: Gradle@2
+#    inputs:
+#      workingDirectory: ''
+#      gradleWrapperFile: 'gradlew'
+#      gradleOptions: '-Xmx3072m'
+#      javaHomeOption: 'JDKVersion'
+#      jdkVersionOption: '17'
+#      jdkArchitectureOption: 'x64'
+#      publishJUnitResults: true
+#      testResultsFiles: '**/TEST-*.xml'
+#      tasks: 'build'
 
-  - script: |
-      ls -la
-    displayName: 'Run a multi-line script'
-  - script: |
-      ifconfig
-    displayName: 'My private IP'
-  - stage: Azure Pipelines Agent
-    displayName: Print env
+stages:
+  - stage: Azure_Pipelines_Agent
+    displayName: Print ENV
     pool:
       name: "$(hyperspace.azure.pool.name.mshosted)"
       vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
@@ -46,38 +62,21 @@ steps:
         displayName: Placeholder Build Step
         steps:
           - bash: |
-              echo "Dummy Build Step - ENV"
+              echo "Dummy Build Step - 1"
               printenv
-               echo "Dummy Build Step - IP"
+              echo "Dummy Build Step - 2"
               curl ifconfig.me/all
-  - stage: Self-hosted Agent
-    displayName: Print env
+  - stage: Self_Hosted_Agent
+    displayName: Self-hosted agent
     pool:
-      name: "$(hyperspace.azure.pool.name.mshosted)"
+      name: "$(hyperspace.azure.pool.name.selfhosted)"
       vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
     jobs:
-      - job: BuildStep
-        displayName: Placeholder Build Step
+      - job: LoopStep1
+        displayName: Loop 1
         steps:
           - bash: |
-              echo "Dummy Build Step - ENV"
+              echo "Dummy Build Step - 1"
               printenv
-               echo "Dummy Build Step - IP"
+              echo "Dummy Build Step - 2"
               curl ifconfig.me/all
-  - script: |
-      curl ifconfig.me/all
-    displayName: 'Azure Pipelines Agent - script'
-  - script: |
-      curl ifconfig.me/all
-    displayName: 'Self-hosted Agent - script'
-  - task: Gradle@2
-    inputs:
-      workingDirectory: ''
-      gradleWrapperFile: 'gradlew'
-      gradleOptions: '-Xmx3072m'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '17'
-      jdkArchitectureOption: 'x64'
-      publishJUnitResults: true
-      testResultsFiles: '**/TEST-*.xml'
-      tasks: 'build'
