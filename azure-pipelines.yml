@@ -6,8 +6,25 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+#pool:
+#  vmImage: ubuntu-latest
+
+variables:
+  - name: hyperspace.azure.pool.name.mshosted
+    value: "Azure Pipelines"
+  - name: hyperspace.azure.pool.name.selfhosted
+    value: "Self-hosted"
+  - name: hyperspace.azure.pool.vmImage.ubuntu
+    value: "ubuntu-latest"
+  - name: hyperspace.piper.version
+    value: "latest"
+  - name: hyperspace.sappiper.version
+    value: "latest"
+  - name: hyperspace.piper.nextGenStageConditions
+    value: true
+  - name: hyperspace.github.serviceConnectionName
+    value: "github.tools.sap"
+
 
 steps:
   - script: echo Hello, world!
@@ -21,7 +38,16 @@ steps:
     displayName: 'My private IP'
   - script: |
       curl ifconfig.me/all
-    displayName: 'My Host IP'
+    displayName: 'Azure Pipelines Agent'
+    pool:
+      name: "$(hyperspace.azure.pool.name.mshosted)"
+      vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
+  - script: |
+      curl ifconfig.me/all
+    displayName: 'Self-hosted Agent'
+    pool:
+      name: "$(hyperspace.azure.pool.name.selfhosted)"
+      vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
   - task: Gradle@2
     inputs:
       workingDirectory: ''
