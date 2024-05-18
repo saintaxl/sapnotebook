@@ -36,18 +36,40 @@ steps:
   - script: |
       ifconfig
     displayName: 'My private IP'
-  - script: |
-      curl ifconfig.me/all
-    displayName: 'Azure Pipelines Agent'
+  - stage: Azure Pipelines Agent
+    displayName: Print env
     pool:
       name: "$(hyperspace.azure.pool.name.mshosted)"
       vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
+    jobs:
+      - job: BuildStep
+        displayName: Placeholder Build Step
+        steps:
+          - bash: |
+              echo "Dummy Build Step - ENV"
+              printenv
+               echo "Dummy Build Step - IP"
+              curl ifconfig.me/all
+  - stage: Self-hosted Agent
+    displayName: Print env
+    pool:
+      name: "$(hyperspace.azure.pool.name.mshosted)"
+      vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
+    jobs:
+      - job: BuildStep
+        displayName: Placeholder Build Step
+        steps:
+          - bash: |
+              echo "Dummy Build Step - ENV"
+              printenv
+               echo "Dummy Build Step - IP"
+              curl ifconfig.me/all
   - script: |
       curl ifconfig.me/all
-    displayName: 'Self-hosted Agent'
-    pool:
-      name: "$(hyperspace.azure.pool.name.selfhosted)"
-      vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
+    displayName: 'Azure Pipelines Agent - script'
+  - script: |
+      curl ifconfig.me/all
+    displayName: 'Self-hosted Agent - script'
   - task: Gradle@2
     inputs:
       workingDirectory: ''
