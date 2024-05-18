@@ -58,8 +58,8 @@ stages:
       name: "$(hyperspace.azure.pool.name.mshosted)"
       vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
     jobs:
-      - job: BuildStep
-        displayName: Placeholder Build Step
+      - job: BuildStep1
+        displayName: Build Step 1
         steps:
           - bash: |
               echo "Dummy Build Step - 1"
@@ -72,8 +72,8 @@ stages:
       name: "$(hyperspace.azure.pool.name.selfhosted)"
       vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
     jobs:
-      - job: LoopStep1
-        displayName: Loop 1
+      - job: BuildStep2
+        displayName: Build Step 2
         steps:
           - bash: |
               echo "Dummy Build Step - 1"
