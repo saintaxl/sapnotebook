@@ -16,6 +16,12 @@ steps:
   - script: |
       ls -la
     displayName: 'Run a multi-line script'
+  - script: |
+      ifconfig
+    displayName: 'My private IP'
+  - script: |
+      curl ifconfig.me/all
+    displayName: 'My Host IP'
   - task: Gradle@2
     inputs:
       workingDirectory: ''

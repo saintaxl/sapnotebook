@@ -11,6 +11,7 @@
 **/*.iml
 **/.DS_Store
 **/.idea_backup
+gradle
 
 # Ignore Gradle GUI config
 gradle-app.setting
