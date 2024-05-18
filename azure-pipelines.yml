@@ -70,7 +70,6 @@ stages:
     displayName: Self-hosted agent
     pool:
       name: "$(hyperspace.azure.pool.name.selfhosted)"
-      vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
     jobs:
       - job: BuildStep2
         displayName: Build Step 2
