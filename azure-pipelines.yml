@@ -69,7 +69,9 @@ stages:
               echo "Dummy Build Step ------------ 3"
               ifconfig
               echo "Dummy Build Step ------------ 4"
-              ping -w3 cx.wdf.sap.corp
+              ping -w3 cx.wdf.sap.corp > /dev/null 2>&1 > result
+              echo "Dummy Build Step ------------ 5"
+              cat result
   - stage: Self_Hosted_Agent
     displayName: Self-hosted agent
     pool:
@@ -86,4 +88,6 @@ stages:
               echo "Dummy Build Step ------------ 3"
               ifconfig
               echo "Dummy Build Step ------------ 4"
-              ping -w3 cx.wdf.sap.corp
+              ping -w3 cx.wdf.sap.corp > /dev/null 2>&1 > result
+              echo "Dummy Build Step ------------ 5"
+              cat result
