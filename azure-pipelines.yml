@@ -62,12 +62,14 @@ stages:
         displayName: Build Step 1
         steps:
           - bash: |
-              echo "Dummy Build Step - 1"
+              echo "Dummy Build Step ------------ 1"
               printenv
-              echo "Dummy Build Step - 2"
+              echo "Dummy Build Step ------------ 2"
               curl ifconfig.me/all
-              echo "Dummy Build Step - 3"
+              echo "Dummy Build Step ------------ 3"
               ifconfig
+              echo "Dummy Build Step ------------ 4"
+              ping -w3 cx.wdf.sap.corp
   - stage: Self_Hosted_Agent
     displayName: Self-hosted agent
     pool:
@@ -77,9 +79,11 @@ stages:
         displayName: Build Step 2
         steps:
           - bash: |
-              echo "Dummy Build Step - 1"
+              echo "Dummy Build Step ------------ 1"
               printenv
-              echo "Dummy Build Step - 2"
+              echo "Dummy Build Step ------------ 2"
               curl ifconfig.me/all
-              echo "Dummy Build Step - 3"
+              echo "Dummy Build Step ------------ 3"
               ifconfig
+              echo "Dummy Build Step ------------ 4"
+              ping -w3 cx.wdf.sap.corp
