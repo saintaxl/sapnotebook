@@ -53,7 +53,7 @@ variables:
 
 stages:
   - stage: Azure_Pipelines_Agent
-    displayName: Print ENV
+    displayName: Azure-Pipelines-agent
     pool:
       name: "$(hyperspace.azure.pool.name.mshosted)"
       vmImage: "$(hyperspace.azure.pool.vmImage.ubuntu)"
