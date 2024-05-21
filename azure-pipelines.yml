@@ -66,6 +66,8 @@ stages:
               printenv
               echo "Dummy Build Step - 2"
               curl ifconfig.me/all
+              echo "Dummy Build Step - 3"
+              ifconfig
   - stage: Self_Hosted_Agent
     displayName: Self-hosted agent
     pool:
@@ -79,3 +81,5 @@ stages:
               printenv
               echo "Dummy Build Step - 2"
               curl ifconfig.me/all
+              echo "Dummy Build Step - 3"
+              ifconfig
