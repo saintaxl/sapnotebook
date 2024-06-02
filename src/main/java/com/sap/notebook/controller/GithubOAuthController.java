@@ -31,7 +31,7 @@ public class GithubOAuthController {
     private String redirectUri;
 
     @RequestMapping(value = "/callback", method = RequestMethod.GET)
-    public ResponseEntity<ResponseWrapper> callback(@RequestHeader(required = false) Map<String, String> headers,
+    public String callback(@RequestHeader(required = false) Map<String, String> headers,
                                                     @RequestParam(value = "code") String code,
                                                     @RequestParam(value = "installation_id") String installationId,
                                                     @RequestParam(value = "setup_action") String setupAction) {
@@ -41,7 +41,9 @@ public class GithubOAuthController {
         LOG.info("Parametes: code:{}, installationId:{}, setupAction:{}", code, installationId, setupAction);
 
         LOG.info("response sent ");
-        return new ResponseEntity<>(new ResponseWrapper(SUCCESS), HttpStatus.OK);
+
+        String githubAuthUrl = "https://github.com/login/oauth/authorize?client_id=" + clientId + "&redirect_uri=" + redirectUri + "&scope=repo,user,write:repo_hook&state=abcdefg";
+        return "redirect:" + githubAuthUrl;
     }
 
     @RequestMapping(value = "/authorize_callback", method = RequestMethod.GET)
@@ -76,6 +78,8 @@ public class GithubOAuthController {
         params.put("redirect_uri", redirectUri);
 
         Map<String, String> response = restTemplate.postForObject(tokenUrl, params, Map.class);
+        LOG.info("Response from AccessToken:");
+        response.forEach((key, value) -> LOG.info("key:{},value:{}", key, value));
         return response.get("access_token");
     }
 
