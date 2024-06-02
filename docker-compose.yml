@@ -1,0 +1,8 @@
+version: '3.0'
+
+services:
+  smee-client:
+    image: deltaprojects/smee-client
+    container_name: smee-client
+    command: -u https://smee.io/XTtimGnQl4KW0Hj -t http://host.docker.internal:8080/github/app/webhook
+    restart: unless-stopped
