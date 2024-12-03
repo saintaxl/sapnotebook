@@ -6,3 +6,9 @@ services:
     container_name: smee-client
     command: -u https://smee.io/XTtimGnQl4KW0Hj -t http://host.docker.internal:8080/github/app/webhook
     restart: unless-stopped
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared-tunnal
+#    command: tunnel --no-autoupdate run --url http://host.docker.internal:8080 --token eyJhIjoiNTYzYTU2Y2MxMWVlMWU0YzM4MDcyMzZiMDU1OGNlYzYiLCJ0IjoiYmQ0NjA5MzItMjRjYi00NjdlLWJmMGQtZjJlZTM0YTljNDMxIiwicyI6Ik9UUmhaV05qTW1RdE5qbG1PUzAwWXpNMExUaGhZamt0WW1JMU9XUTRPRFZtTlRrMSJ9
+    command: tunnel --no-autoupdate run --token eyJhIjoiNTYzYTU2Y2MxMWVlMWU0YzM4MDcyMzZiMDU1OGNlYzYiLCJ0IjoiYmQ0NjA5MzItMjRjYi00NjdlLWJmMGQtZjJlZTM0YTljNDMxIiwicyI6Ik16UmtZVFEzT1dFdE1qZ3hNeTAwTjJVd0xUZzJOVEF0WTJKaFpEUTBPR1F3WldabCJ9
+    restart: unless-stopped
